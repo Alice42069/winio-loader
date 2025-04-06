@@ -1,0 +1,1 @@
+It uses memflow-winio to load unsigned drivers. Except it doesnt work with absoulte paths and the code is bad.
