@@ -134,7 +134,7 @@ impl WinIoLoader {
         // Windows api just works worse than sc command T_T
         Command::new("cmd")
             .arg("/C")
-            .arg(format!(r#"sc stop {}"#, name))
+            .arg(format!("sc stop {}", name))
             .stdout(Stdio::null())
             .stdin(Stdio::null())
             .stderr(Stdio::null())
@@ -145,7 +145,7 @@ impl WinIoLoader {
 
         Command::new("cmd")
             .arg("/C")
-            .arg(format!(r#"sc delete {}"#, name))
+            .arg(format!("sc delete {}", name))
             .stdout(Stdio::null())
             .stdin(Stdio::null())
             .stderr(Stdio::null())
@@ -157,7 +157,7 @@ impl WinIoLoader {
         Command::new("cmd")
             .arg("/C")
             .arg(format!(
-                r#"sc create {} type=kernel binPath={} && sc start {}"#,
+                "sc create {} type=kernel binPath={} && sc start {}",
                 name,
                 fs::canonicalize(path)
                     .map_err(|_| Error::Windows)?
