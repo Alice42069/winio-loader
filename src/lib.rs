@@ -47,7 +47,7 @@ pub struct WinIoLoader {
     kernel: Kernel,
     pub se_validate_image_header: Address,
     pub se_validate_image_data: Address,
-    pub dse: bool,
+    dse: bool,
     create_winio: bool,
 }
 
@@ -103,6 +103,16 @@ impl WinIoLoader {
             dse,
             create_winio,
         })
+    }
+
+    pub fn get_dse(&mut self) -> Result<bool, Error> {
+        let mut read_raw = |a: Address| self.kernel.read_raw(a, 4).map_err(|_| Error::Memflow);
+
+        // These should never have an mismatching state
+        Ok(
+            read_raw(self.se_validate_image_header)? == SE_VALIDATE_IMAGE_HEADER_ORIGINAL
+                || read_raw(self.se_validate_image_data)? == SE_VALIDATE_IMAGE_DATA_ORIGINAL,
+        )
     }
 
     /// Sets Driver Signature Enforcment based on `enabled`
