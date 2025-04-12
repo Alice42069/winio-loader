@@ -12,5 +12,4 @@ memflow = "0.2.3"
 memflow-win32 = "0.2.0"
 memflow-winio = { git = "https://github.com/a2x/memflow-winio" }
 memflow-vdm = { git = "https://github.com/a2x/memflow-vdm" }
-rayon = "1.10.0"
 thiserror = "2.0.12"
